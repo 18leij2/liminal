@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class PlayerController : MonoBehaviour
     private bool canExit = false;
 
     public static event Action OpenDoors;
+    
+    public GameObject staminaBarObject;
+    public Image staminaBar;
+    public float stamina, maxStamina = 100f;
 
     private void Start()
     {
@@ -48,11 +53,25 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            movementSpeed = 20f;
+            staminaBarObject.SetActive(true);
+            if (stamina > 0.1f) {
+                stamina -= 0.1f;
+                staminaBar.fillAmount = stamina / maxStamina;
+                movementSpeed = 20f;
+            } else {
+                movementSpeed = 10f;
+            }
         }
         else
         {
+            
             movementSpeed = 10f;
+            if (stamina + 0.1f <= maxStamina) {
+                stamina += 0.1f;
+                staminaBar.fillAmount = stamina / maxStamina;
+            } else {
+                staminaBarObject.SetActive(false);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.F))
