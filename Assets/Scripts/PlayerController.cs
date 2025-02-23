@@ -53,13 +53,15 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            staminaBarObject.SetActive(true);
-            if (stamina > 0.1f) {
-                stamina -= 0.1f;
-                staminaBar.fillAmount = stamina / maxStamina;
-                movementSpeed = 20f;
-            } else {
-                movementSpeed = 10f;
+            if (vertical > 0) {
+                staminaBarObject.SetActive(true);
+                if (stamina > 0.1f) {
+                    stamina -= 0.1f;
+                    staminaBar.fillAmount = stamina / maxStamina;
+                    movementSpeed = 20f;
+                } else {
+                    movementSpeed = 10f;
+                }
             }
         }
         else
