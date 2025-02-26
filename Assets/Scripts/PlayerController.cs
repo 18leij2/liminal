@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,10 +20,21 @@ public class PlayerController : MonoBehaviour
     private bool canExit = false;
 
     public static event Action OpenDoors;
+    
+    public GameObject staminaBarObject;
+    public Image staminaBar;
+    public float stamina, maxStamina = 100f;
+
+    public GameObject hotbarObject;
+    public GameObject inventoryObject;
+    public GameObject hotbarSlotsObject;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        inventoryObject.SetActive(false);
+        hotbarObject.SetActive(true);
+        hotbarSlotsObject.SetActive(true);
         movementSpeed = 10f;
     }
 
@@ -48,11 +60,27 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            movementSpeed = 20f;
+            if (vertical > 0) {
+                staminaBarObject.SetActive(true);
+                if (stamina > 0.1f) {
+                    stamina -= 0.1f;
+                    staminaBar.fillAmount = stamina / maxStamina;
+                    movementSpeed = 20f;
+                } else {
+                    movementSpeed = 10f;
+                }
+            }
         }
         else
         {
+            
             movementSpeed = 10f;
+            if (stamina + 0.1f <= maxStamina) {
+                stamina += 0.1f;
+                staminaBar.fillAmount = stamina / maxStamina;
+            } else {
+                staminaBarObject.SetActive(false);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -82,6 +110,18 @@ public class PlayerController : MonoBehaviour
                 lights.SetActive(true);
                 canPress = false;
                 canExit = false;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            if (inventoryObject.activeSelf) {
+                inventoryObject.SetActive(false);
+                hotbarObject.SetActive(true);
+                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
+            } else {
+                inventoryObject.SetActive(true);
+                hotbarObject.SetActive(false);
+                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -90f, 0f);
             }
         }
     }
