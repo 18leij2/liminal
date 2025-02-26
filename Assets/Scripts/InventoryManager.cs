@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
-    public static Inventory Singleton;
+    public static InventoryManager Singleton;
     public static InventoryItem carriedItem;
 
     [SerializeField] InventorySlot[] inventorySlots;
     [SerializeField] InventorySlot[] hotbarSlots;
-
-    // 0=Head, 1=Chest, 2=Legs, 3=Feet
-    [SerializeField] InventorySlot[] equipmentSlots;
 
     [SerializeField] Transform draggablesTransform;
     [SerializeField] InventoryItem itemPrefab;
@@ -83,13 +80,20 @@ public class Inventory : MonoBehaviour
         if(_item == null)
         { _item = PickRandomItem(); }
 
+        for (int i = 0; i < hotbarSlots.Length; i++) {
+            if (hotbarSlots[i].myItem == null) {
+                Instantiate(itemPrefab, hotbarSlots[i].transform).Initialize(_item, hotbarSlots[i]);
+                return;
+            }
+        }
+
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             // Check if the slot is empty
             if(inventorySlots[i].myItem == null)
             {
                 Instantiate(itemPrefab, inventorySlots[i].transform).Initialize(_item, inventorySlots[i]);
-                break;
+                return;
             }
         }
     }

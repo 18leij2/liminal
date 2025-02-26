@@ -25,9 +25,16 @@ public class PlayerController : MonoBehaviour
     public Image staminaBar;
     public float stamina, maxStamina = 100f;
 
+    public GameObject hotbarObject;
+    public GameObject inventoryObject;
+    public GameObject hotbarSlotsObject;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        inventoryObject.SetActive(false);
+        hotbarObject.SetActive(true);
+        hotbarSlotsObject.SetActive(true);
         movementSpeed = 10f;
     }
 
@@ -103,6 +110,18 @@ public class PlayerController : MonoBehaviour
                 lights.SetActive(true);
                 canPress = false;
                 canExit = false;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            if (inventoryObject.activeSelf) {
+                inventoryObject.SetActive(false);
+                hotbarObject.SetActive(true);
+                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
+            } else {
+                inventoryObject.SetActive(true);
+                hotbarObject.SetActive(false);
+                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -90f, 0f);
             }
         }
     }
