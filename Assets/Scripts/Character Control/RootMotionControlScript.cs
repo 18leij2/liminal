@@ -190,6 +190,16 @@ public class RootMotionControlScript : MonoBehaviour
         {
             anim.SetBool("Movement", false);
         }
+
+        if (_inputForward >= 0f)
+        {
+            anim.SetBool("Forward", true);
+        }
+        else
+        {
+            anim.SetBool("Forward", false);
+        }
+
         anim.SetFloat("velX", _inputRight);
         anim.SetFloat("velY", _inputForward);
         anim.SetBool("isFalling", !isGrounded);
