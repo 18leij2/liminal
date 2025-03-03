@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -46,11 +48,27 @@ public class RootMotionControlScript : MonoBehaviour
     float _inputTurn = 0f;
     float _inputRight = 0f;
 
+    private bool canPress = false;
+    private bool canExit = false;
+
+    public static event Action OpenDoors;
+
+    public float speedMultiplier = 0.5f;
+    public GameObject staminaBarObject;
+    public Image staminaBar;
+    public float stamina, maxStamina = 100f;
+
+    public GameObject hotbarObject;
+    public GameObject inventoryObject;
+    public GameObject hotbarSlotsObject;
+
+    public GameObject flashLight;
+    public GameObject lights;
+
 
     //Useful if you implement jump in the future...
     public float jumpableGroundNormalMaxAngle = 45f;
     public bool closeToJumpableGround;
-
 
     private int groundContactCount = 0;
 
@@ -90,6 +108,10 @@ public class RootMotionControlScript : MonoBehaviour
 
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
+
+        inventoryObject.SetActive(false);
+        hotbarObject.SetActive(true);
+        hotbarSlotsObject.SetActive(true);
     }
 
 
@@ -106,6 +128,83 @@ public class RootMotionControlScript : MonoBehaviour
             // This makes certain that the action is handled!
             _inputActionFired = _inputActionFired || cinput.Action;
 
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (true) //(vertical > 0)
+            {
+                staminaBarObject.SetActive(true);
+                if (stamina > 0.1f)
+                {
+                    stamina -= 0.1f;
+                    staminaBar.fillAmount = stamina / maxStamina;
+                    speedMultiplier = 1f;
+                }
+                else
+                {
+                    speedMultiplier = 0.5f;
+                }
+            }
+        }
+        else
+        {
+            speedMultiplier = 0.5f;
+            if (stamina + 0.1f <= maxStamina)
+            {
+                stamina += 0.1f;
+                staminaBar.fillAmount = stamina / maxStamina;
+            }
+            else
+            {
+                staminaBarObject.SetActive(false);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (flashLight.activeSelf == false)
+            {
+                flashLight.SetActive(true);
+            }
+            else if (flashLight.activeSelf == true)
+            {
+                flashLight.SetActive(false);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (canPress)
+            {
+                lights.SetActive(false);
+                canExit = true;
+                OpenDoors?.Invoke();
+            }
+
+            if (canExit && false)
+            {
+                transform.position = new Vector3(0, 0, 0);
+                lights.SetActive(true);
+                canPress = false;
+                canExit = false;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (inventoryObject.activeSelf)
+            {
+                inventoryObject.SetActive(false);
+                hotbarObject.SetActive(true);
+                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
+            }
+            else
+            {
+                inventoryObject.SetActive(true);
+                hotbarObject.SetActive(false);
+                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -90f, 0f);
+            }
         }
     }
 
@@ -194,14 +293,19 @@ public class RootMotionControlScript : MonoBehaviour
         if (_inputForward >= 0f)
         {
             anim.SetBool("Forward", true);
+
+            anim.SetFloat("velX", (_inputRight * speedMultiplier));
+            anim.SetFloat("velY", (_inputForward * speedMultiplier));
         }
         else
         {
             anim.SetBool("Forward", false);
+
+            anim.SetFloat("velX", _inputRight);
+            anim.SetFloat("velY", _inputForward);
         }
 
-        anim.SetFloat("velX", _inputRight);
-        anim.SetFloat("velY", _inputForward);
+        
         anim.SetBool("isFalling", !isGrounded);
         
         // anim.SetBool("doButtonPress", doButtonPress);
@@ -230,6 +334,10 @@ public class RootMotionControlScript : MonoBehaviour
 
         }
 
+        if (collision.gameObject.tag == "Pressure")
+        {
+            canPress = true;
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -240,6 +348,10 @@ public class RootMotionControlScript : MonoBehaviour
             --groundContactCount;
         }
 
+        if (collision.gameObject.tag == "Pressure")
+        {
+            canPress = false;
+        }
     }
 
     private void OnAnimatorIK(int layerIndex)
