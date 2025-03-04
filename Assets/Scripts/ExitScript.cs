@@ -12,11 +12,13 @@ public class ExitScript : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.OpenDoors += ExitOpen;
+        RootMotionControlScript.OpenDoors += ExitOpen;
     }
 
     private void OnDisable()
     {
         PlayerController.OpenDoors -= ExitOpen;
+        RootMotionControlScript.OpenDoors -= ExitOpen;
     }
 
     private void ExitOpen()
