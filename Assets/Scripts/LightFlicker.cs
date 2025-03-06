@@ -7,6 +7,7 @@ public class LightFlicker : MonoBehaviour
     public float minFlickerSpeed;
     public float maxFlickerSpeed;
     public float timer;
+    public float maxIntensity = 1f;
     float interval;
 
     void Start() {
@@ -20,7 +21,7 @@ public class LightFlicker : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > interval){
             if (this.gameObject.GetComponent<Light>().intensity == 0f) {
-                this.gameObject.GetComponent<Light>().intensity = Random.Range(0f, 1f);
+                this.gameObject.GetComponent<Light>().intensity = Random.Range(0f, maxIntensity);
             } else {
                 this.gameObject.GetComponent<Light>().intensity = 0f;
             }
