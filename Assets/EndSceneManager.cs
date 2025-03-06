@@ -4,19 +4,21 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class EndSceneManager : MonoBehaviour
 {
-    public TMP_Text endText;
+    public TextMeshProUGUI endText;
     public GameObject screenOverlay; 
     public AudioSource victoryMusic;
     public AudioSource buzzingSound;
     public GameObject player;
     private bool isPlayerMoving = false;
 
+    void Start() {
+        screenOverlay.SetActive(false);
+    }
     public void Escape()
     {
         screenOverlay.SetActive(true);
         screenOverlay.GetComponent<Image>().color = Color.white;
         //victoryMusic.Play();
-        endText.gameObject.SetActive(true);
         endText.color = Color.black;
         endText.text = "You escaped the back rooms… but something escaped with you. Can you feel it watching? Can you hear it breathing?";
 
@@ -28,7 +30,6 @@ public class EndSceneManager : MonoBehaviour
         screenOverlay.SetActive(true);
         screenOverlay.GetComponent<Image>().color = Color.black;
         //buzzingSound.Play();
-        endText.gameObject.SetActive(true);
         endText.color = Color.white;
         endText.text = "You decided to become one with the void…like the rest of them did.";
 
@@ -43,7 +44,6 @@ public class EndSceneManager : MonoBehaviour
         
         // Simulate player walking into the hallway.
         //isPlayerMoving = true;
-        endText.gameObject.SetActive(true);
         endText.color = Color.white;
         endText.text = "Your curiosity consumed you. You refused to leave without the answers you craved, but will it be worth the price?";
 
