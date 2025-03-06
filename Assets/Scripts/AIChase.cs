@@ -1,33 +1,43 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class AIChase : MonoBehaviour
 {
     public Transform player;
     private NavMeshAgent agent;
     private Rigidbody rb;
-    public LayerMask wallLayer; // Assign the wall layer in Inspector
+    public LayerMask wallLayer;
 
     private Vector3 lastPosition;
     private float stuckTimer = 0f;
-    public float stuckCheckTime = 1.5f; // Time before considering AI stuck
-    public float rerouteDistance = 2.0f; // Distance to offset when rerouting
+    public float stuckCheckTime = 1.5f;
+    public float rerouteDistance = 2.0f;
+
+    public GameObject tryAgainPanel;
+    public TextMeshProUGUI tryAgainText;
+    public Button tryAgainButton;
+
+    public float catchDistance = 2.0f;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
 
-        // Rigidbody settings to prevent phasing through walls
         rb.freezeRotation = true;
-        rb.isKinematic = false; // Allow physics interactions
+        rb.isKinematic = false;
 
-        // Adjust NavMeshAgent settings
-        agent.autoBraking = true; // Stops AI from sliding
+        agent.autoBraking = true;
         agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
         agent.avoidancePriority = 50;
 
         lastPosition = transform.position;
+
+        tryAgainPanel.SetActive(false);
+        tryAgainButton.onClick.AddListener(RestartGame);
     }
 
     void Update()
@@ -45,7 +55,6 @@ public class AIChase : MonoBehaviour
                 FindAlternativePath();
             }
 
-            // Check if the AI is stuck
             if (Vector3.Distance(transform.position, lastPosition) < 0.1f)
             {
                 stuckTimer += Time.deltaTime;
@@ -61,6 +70,11 @@ public class AIChase : MonoBehaviour
             }
 
             lastPosition = transform.position;
+
+            if (Vector3.Distance(transform.position, player.position) < catchDistance)
+            {
+                TriggerTryAgain();
+            }
         }
     }
 
@@ -69,7 +83,6 @@ public class AIChase : MonoBehaviour
         Vector3 direction = (target - transform.position).normalized;
         float distance = Vector3.Distance(transform.position, target);
 
-        // Check for walls using SphereCast instead of Raycast for better detection
         return Physics.SphereCast(transform.position, 0.5f, direction, out _, distance, wallLayer);
     }
 
@@ -89,10 +102,22 @@ public class AIChase : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // If the AI collides with a wall, back off and reroute
         if (((1 << collision.gameObject.layer) & wallLayer) != 0)
         {
             FindAlternativePath();
         }
+    }
+
+    void TriggerTryAgain()
+    {
+        tryAgainPanel.SetActive(true);
+        tryAgainText.text = "It has you now...";
+        Time.timeScale = 0f;
+    }
+
+    void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
