@@ -59,8 +59,8 @@ public class RootMotionControlScript : MonoBehaviour
     public float stamina, maxStamina = 100f;
 
     public GameObject hotbarObject;
-    public GameObject inventoryObject;
     public GameObject hotbarSlotsObject;
+    public CanvasGroup inventoryGroup;
 
     public GameObject flashLight;
     public GameObject lights;
@@ -109,9 +109,9 @@ public class RootMotionControlScript : MonoBehaviour
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
 
-        inventoryObject.SetActive(false);
-        hotbarObject.SetActive(true);
-        hotbarSlotsObject.SetActive(true);
+        // inventoryObject.SetActive(false);
+        // hotbarObject.SetActive(true);
+        // hotbarSlotsObject.SetActive(true);
     }
 
 
@@ -193,17 +193,19 @@ public class RootMotionControlScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (inventoryObject.activeSelf)
-            {
-                inventoryObject.SetActive(false);
-                hotbarObject.SetActive(true);
-                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
-            }
-            else
-            {
-                inventoryObject.SetActive(true);
+            if (inventoryGroup.alpha == 0f) {
+                inventoryGroup.alpha = 1f;
+                inventoryGroup.interactable = true;
+                inventoryGroup.blocksRaycasts = true;
                 hotbarObject.SetActive(false);
                 hotbarSlotsObject.transform.localPosition = new Vector3(0f, -90f, 0f);
+                
+            } else {
+                inventoryGroup.alpha = 0f;
+                inventoryGroup.interactable = false;
+                inventoryGroup.blocksRaycasts = false;
+                hotbarObject.SetActive(true);
+                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
             }
         }
     }
