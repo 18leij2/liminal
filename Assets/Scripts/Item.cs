@@ -6,6 +6,7 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public Sprite sprite;
+    public string itemName;
     // public SlotTag itemTag;
 
     // [Header("If the item can be equipped")]

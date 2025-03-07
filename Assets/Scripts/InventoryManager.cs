@@ -70,4 +70,19 @@ public class InventoryManager : MonoBehaviour
         int random = Random.Range(0, items.Length);
         return items[random];
     }
+
+    public bool HasItem(string itemName)
+    {
+        foreach (InventorySlot slot in inventorySlots)
+        {
+            if (slot.myItem != null && slot.myItem.myItem != null &&
+                slot.myItem.myItem.itemName == itemName)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
