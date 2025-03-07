@@ -5748,7 +5748,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 1
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
@@ -6330,7 +6330,7 @@ GameObject:
   - component: {fileID: 1118704098}
   - component: {fileID: 1118704097}
   - component: {fileID: 1118704096}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11539,42 +11539,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3605468943836528190, guid: 9f16c62ae4203904cae34bcbbad9c28f, type: 3}
   m_PrefabInstance: {fileID: 4523966119527116921}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &919132148085345864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148085345863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1c87c9c332bbef46adeaf8dd5d76c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &919132148085345869 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8044219065689554686, guid: 9f16c62ae4203904cae34bcbbad9c28f, type: 3}
-  m_PrefabInstance: {fileID: 4523966119527116921}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &919132148085345870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148085345863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85fe8521b4e4f8c4f8aad61ef659cab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  steps:
-  - {fileID: 8300000, guid: 9f221f65fd076cc4b900a5bac1b24e03, type: 3}
-  - {fileID: 8300000, guid: 308e72a654ab0534ba31463ba034f387, type: 3}
-  - {fileID: 8300000, guid: c8dd872b437a81c4e84477b5d7f06bea, type: 3}
-  - {fileID: 8300000, guid: a92e394bd31b13d47bf6466cb560c4d1, type: 3}
-  - {fileID: 8300000, guid: 98f3ecc86d1d0dd4c973cc7cab3ceaef, type: 3}
-  animator: {fileID: 919132148085345869}
 --- !u!1001 &4523966119527116921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11643,17 +11607,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1426347411}
     - target: {fileID: 4523966119578256002, guid: 9f16c62ae4203904cae34bcbbad9c28f, type: 3}
-      propertyPath: inventoryGroup
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523966119578256002, guid: 9f16c62ae4203904cae34bcbbad9c28f, type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 996907097}
-    - target: {fileID: 4523966119578256002, guid: 9f16c62ae4203904cae34bcbbad9c28f, type: 3}
-      propertyPath: inventoryObject
-      value: 
-      objectReference: {fileID: 1625439976}
     - target: {fileID: 4523966119578256002, guid: 9f16c62ae4203904cae34bcbbad9c28f, type: 3}
       propertyPath: staminaBarObject
       value: 
@@ -11671,6 +11627,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1774417981, guid: 64eb99f1a242938419741a49e69e26e4, type: 3}
+      propertyPath: m_CollideAgainst.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
     - target: {fileID: 6099866153195166214, guid: 64eb99f1a242938419741a49e69e26e4, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -11721,6 +11681,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6099866153195166233, guid: 64eb99f1a242938419741a49e69e26e4, type: 3}
       propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 543450652629832957}
+    - target: {fileID: 6099866153195166233, guid: 64eb99f1a242938419741a49e69e26e4, type: 3}
+      propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 543450652629832957}
     m_RemovedComponents: []
