@@ -43,8 +43,8 @@ public class ExitScript : MonoBehaviour
     void Update()
     {
         if (exitOpening) {
-            left.transform.Translate(0,0, -0.005f);
-            right.transform.Translate(0,0, 0.005f);
+            left.transform.Translate(0,0, -0.001f);
+            right.transform.Translate(0,0, 0.001f);
         }
         if (left.transform.position.z <= leftInitialZ - moveAmount) {
             exitOpening = false;
