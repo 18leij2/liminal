@@ -21,10 +21,20 @@ public class AIChase : MonoBehaviour
     public TextMeshProUGUI tryAgainText;
     public Button tryAgainButton;
 
+    // FOR PLAYING SOUNDS
+    public AudioSource audioSource;
+    public AudioClip loseSound;
+
     public float catchDistance = 2.0f;
 
     void Start()
     {
+        // needed to add this to fix restart not unpausing
+        Time.timeScale = 1f;
+
+        // adding audio source
+        audioSource = GetComponent<AudioSource>();
+
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>(); // Get the Animator component
@@ -135,6 +145,9 @@ public class AIChase : MonoBehaviour
         tryAgainPanel.SetActive(true);
         tryAgainText.text = "It has you now...";
         Time.timeScale = 0f;
+
+        // play the sound
+        audioSource.PlayOneShot(loseSound);
     }
 
     void RestartGame()
