@@ -9,6 +9,7 @@ public class KeypadOpener : MonoBehaviour
     public CanvasGroup hotbarSlotsGroup;
     public CanvasGroup inventoryGroup;
     public CanvasGroup keypadGroup;
+    public CanvasGroup hintGroup;
 
     bool canUseKeypad = false;
 
@@ -29,6 +30,9 @@ public class KeypadOpener : MonoBehaviour
         if (c.gameObject.tag == "Player") {
             Debug.Log("player can use keypad");
             canUseKeypad = true;
+            hintGroup.alpha = 1f;
+            hintGroup.interactable = true;
+            hintGroup.blocksRaycasts = true;
         }
     }
 
@@ -39,10 +43,17 @@ public class KeypadOpener : MonoBehaviour
             if (keypadGroup.alpha == 1f) {
                 CloseKeypad();
             }
+            hintGroup.alpha = 0f;
+            hintGroup.interactable = false;
+            hintGroup.blocksRaycasts = false;
         }
     }
 
     void OpenKeypad() {
+        hintGroup.alpha = 0f;
+        hintGroup.interactable = false;
+        hintGroup.blocksRaycasts = false;
+
         keypadGroup.alpha = 1f;
         keypadGroup.interactable = true;
         keypadGroup.blocksRaycasts = true;
