@@ -9,6 +9,7 @@ public class AIChase : MonoBehaviour
     public Transform player;
     private NavMeshAgent agent;
     private Rigidbody rb;
+    private Animator animator; // Reference to Animator
     public LayerMask wallLayer;
 
     private Vector3 lastPosition;
@@ -20,12 +21,23 @@ public class AIChase : MonoBehaviour
     public TextMeshProUGUI tryAgainText;
     public Button tryAgainButton;
 
+    // FOR PLAYING SOUNDS
+    public AudioSource audioSource;
+    public AudioClip loseSound;
+
     public float catchDistance = 2.0f;
 
     void Start()
     {
+        // needed to add this to fix restart not unpausing
+        Time.timeScale = 1f;
+
+        // adding audio source
+        audioSource = GetComponent<AudioSource>();
+
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>(); // Get the Animator component
 
         rb.freezeRotation = true;
         rb.isKinematic = false;
@@ -38,21 +50,34 @@ public class AIChase : MonoBehaviour
 
         tryAgainPanel.SetActive(false);
         tryAgainButton.onClick.AddListener(RestartGame);
+        
+        SetAnimationState("isIdle"); // Start with Idle
     }
 
     void Update()
     {
         if (player != null)
         {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
             Vector3 targetPosition = player.position;
 
-            if (!IsPathBlocked(targetPosition))
+            if (distanceToPlayer > catchDistance) // If far away, chase the player
             {
-                agent.SetDestination(targetPosition);
+                if (!IsPathBlocked(targetPosition))
+                {
+                    agent.SetDestination(targetPosition);
+                    SetAnimationState("isChasing");
+                }
+                else
+                {
+                    FindAlternativePath();
+                    SetAnimationState("isWalking");
+                }
             }
-            else
+            else // Close enough to attack
             {
-                FindAlternativePath();
+                SetAnimationState("isAttacking");
+                TriggerTryAgain();
             }
 
             if (Vector3.Distance(transform.position, lastPosition) < 0.1f)
@@ -62,6 +87,7 @@ public class AIChase : MonoBehaviour
                 {
                     FindAlternativePath();
                     stuckTimer = 0f;
+                    SetAnimationState("isWalking");
                 }
             }
             else
@@ -70,12 +96,17 @@ public class AIChase : MonoBehaviour
             }
 
             lastPosition = transform.position;
-
-            if (Vector3.Distance(transform.position, player.position) < catchDistance)
-            {
-                TriggerTryAgain();
-            }
         }
+    }
+
+    void SetAnimationState(string newState)
+    {
+        animator.SetBool("isIdle", false);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isChasing", false);
+        animator.SetBool("isAttacking", false);
+
+        animator.SetBool(newState, true);
     }
 
     bool IsPathBlocked(Vector3 target)
@@ -105,6 +136,7 @@ public class AIChase : MonoBehaviour
         if (((1 << collision.gameObject.layer) & wallLayer) != 0)
         {
             FindAlternativePath();
+            SetAnimationState("isWalking");
         }
     }
 
@@ -113,6 +145,9 @@ public class AIChase : MonoBehaviour
         tryAgainPanel.SetActive(true);
         tryAgainText.text = "It has you now...";
         Time.timeScale = 0f;
+
+        // play the sound
+        audioSource.PlayOneShot(loseSound);
     }
 
     void RestartGame()
