@@ -5,48 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ExitLevel0 : MonoBehaviour
 {
-    public GameObject leftDoor;  // Left part of the door
-    public GameObject rightDoor; // Right part of the door
-    public float moveAmount = 5f; // How far the doors should open
-    public string nextSceneName = "Level 1"; // Name of the next scene
+    public string nextSceneName = "Level 1"; // Name of the scene to load
 
     private bool isNearDoor = false;
-    private bool doorOpened = false; // To prevent multiple openings
-    private bool exitOpening = false;
-
-    private float leftInitialZ;
-    private float rightInitialZ;
-
-    void Start()
-    {
-        // Store the initial Z positions to control how far doors open
-        leftInitialZ = leftDoor.transform.position.z;
-        rightInitialZ = rightDoor.transform.position.z;
-    }
-
-    void Update()
-    {
-        // Animate door opening if triggered
-        if (exitOpening)
-        {
-            leftDoor.transform.Translate(0, 0, -0.05f); // Adjust speed as needed
-            rightDoor.transform.Translate(0, 0, 0.05f); // Adjust speed as needed
-
-            // Stop moving when reaching target open distance
-            if (leftDoor.transform.position.z <= leftInitialZ - moveAmount)
-            {
-                exitOpening = false;
-                Debug.Log("Doors fully opened. Loading next level...");
-                SceneManager.LoadScene(nextSceneName); // Load Level 1
-            }
-        }
-
-        // Auto-check when near door and not already opened
-        if (isNearDoor && !doorOpened)
-        {
-            TryOpenDoor();
-        }
-    }
+    private bool doorOpened = false; // Prevents repeated triggers
 
     private void OnTriggerEnter(Collider other)
     {
@@ -54,6 +16,7 @@ public class ExitLevel0 : MonoBehaviour
         {
             Debug.Log("Player near exit door.");
             isNearDoor = true;
+            TryOpenDoor(); // Attempt to open the door when player enters trigger
         }
     }
 
@@ -67,6 +30,8 @@ public class ExitLevel0 : MonoBehaviour
 
     private void TryOpenDoor()
     {
+        if (doorOpened) return; // Prevent multiple triggers
+
         if (InventoryManager.Singleton != null)
         {
             bool hasKey = InventoryManager.Singleton.HasItem("Key");
@@ -74,8 +39,9 @@ public class ExitLevel0 : MonoBehaviour
 
             if (hasKey)
             {
-                ExitOpen(); // Start opening door
                 doorOpened = true;
+                Debug.Log("Key found! Loading next level...");
+                SceneManager.LoadScene(nextSceneName); // Load Level 1
             }
             else
             {
@@ -84,13 +50,7 @@ public class ExitLevel0 : MonoBehaviour
         }
         else
         {
-            Debug.LogError("InventoryManager not found in scene.");
+            Debug.LogError("InventoryManager.Singleton is null.");
         }
-    }
-
-    private void ExitOpen()
-    {
-        Debug.Log("Opening exit door...");
-        exitOpening = true; // Begin animation
     }
 }
