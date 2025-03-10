@@ -81,6 +81,13 @@ public class InventoryManager : MonoBehaviour
                 return true;
             }
         }
+        foreach (InventorySlot slot in hotbarSlots) {
+            if (slot.myItem != null && slot.myItem.myItem != null &&
+                slot.myItem.myItem.itemName == itemName)
+            {
+                return true;
+            }
+        }
         return false;
     }
 

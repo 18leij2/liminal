@@ -1768,7 +1768,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051264871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.835009, y: 1.2813329, z: -8.3525}
+  m_LocalPosition: {x: 23.108429, y: 1.2813385, z: -8.3525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1822,7 +1822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6099866153195166214, guid: 64eb99f1a242938419741a49e69e26e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.834948
+      value: 23.108335
       objectReference: {fileID: 0}
     - target: {fileID: 6099866153195166214, guid: 64eb99f1a242938419741a49e69e26e4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2067,7 +2067,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1133383667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3abf50ef54e36452c823f81efe032d9b, type: 3}
+  m_Script: {fileID: 11500000, guid: a432ab3040ce3534d81902e554b0821b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1140911018
@@ -3413,6 +3413,8 @@ MonoBehaviour:
   tryAgainPanel: {fileID: 1982742271}
   tryAgainText: {fileID: 1265118658}
   tryAgainButton: {fileID: 1499236993}
+  audioSource: {fileID: 0}
+  loseSound: {fileID: 0}
   catchDistance: 1
 --- !u!65 &1702231334
 BoxCollider:
