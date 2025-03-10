@@ -6,11 +6,10 @@ public class ExitScript : MonoBehaviour
 {
     public GameObject left;
     public GameObject right;
-    public float moveAmount = 5f;
+    public float moveAmount = 5f; // How far each door moves to open
     bool exitOpening = false;
     float leftInitialZ;
     float rightInitialZ;
-
 
     private bool isNearDoor = false;
     private bool doorOpened = false; // Prevents multiple triggers
@@ -27,10 +26,29 @@ public class ExitScript : MonoBehaviour
         RootMotionControlScript.OpenDoors -= ExitOpen;
     }
 
-<<<<<<< HEAD
-    private void Update()
+    void Start()
     {
-        if (isNearDoor && !doorOpened) // Check if player is near and door is not already open
+        leftInitialZ = left.transform.position.z;
+        rightInitialZ = right.transform.position.z;
+    }
+
+    void Update()
+    {
+        // Handle door animation when opening
+        if (exitOpening)
+        {
+            left.transform.Translate(0, 0, -0.05f); // Adjust speed as needed
+            right.transform.Translate(0, 0, 0.05f); // Adjust speed as needed
+
+            // Stop moving when reaching target position
+            if (left.transform.position.z <= leftInitialZ - moveAmount)
+            {
+                exitOpening = false;
+            }
+        }
+
+        // Check if player is near and has key
+        if (isNearDoor && !doorOpened)
         {
             Debug.Log("Player is near the door, attempting to open...");
             TryOpenDoor();
@@ -63,8 +81,8 @@ public class ExitScript : MonoBehaviour
 
             if (hasKey)
             {
-                ExitOpen();
-                doorOpened = true;
+                ExitOpen(); // Trigger door opening
+                doorOpened = true; // Prevent repeat opening
             }
             else
             {
@@ -77,37 +95,9 @@ public class ExitScript : MonoBehaviour
         }
     }
 
-
-    private void ExitOpen()
-    {
-        left.transform.Translate(0, 0, -moveAmount);
-        right.transform.Translate(0, 0, moveAmount);
-        Debug.Log("Exit Door Opened!");
-=======
     public void ExitOpen()
     {
-        // left.transform.Translate(0, 0, -moveAmount);
-        // right.transform.Translate(0, 0, moveAmount);
-        exitOpening = true;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        leftInitialZ = left.transform.position.z;
-        rightInitialZ = left.transform.position.z;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (exitOpening) {
-            left.transform.Translate(0,0, -0.001f);
-            right.transform.Translate(0,0, 0.001f);
-        }
-        if (left.transform.position.z <= leftInitialZ - moveAmount) {
-            exitOpening = false;
-        }
->>>>>>> main
+        Debug.Log("Exit Door Opening!");
+        exitOpening = true; // Trigger smooth opening in Update()
     }
 }
