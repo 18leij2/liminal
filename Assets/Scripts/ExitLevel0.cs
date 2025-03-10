@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class ExitLevel0 : MonoBehaviour
 {
-    public string nextSceneName = "Level 1"; // Name of the scene to load
 
     private bool isNearDoor = false;
     private bool doorOpened = false; // Prevents repeated triggers
@@ -41,7 +40,7 @@ public class ExitLevel0 : MonoBehaviour
             {
                 doorOpened = true;
                 Debug.Log("Key found! Loading next level...");
-                SceneManager.LoadScene(nextSceneName); // Load Level 1
+                SceneManager.LoadScene("Level 1");
             }
             else
             {
