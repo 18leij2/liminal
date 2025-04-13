@@ -37,6 +37,8 @@ public class RootMotionControlScript : MonoBehaviour
     public Transform cameraTransform;
     public float rotationSpeed = 0.8f;
 
+    public CanvasGroup hintGroup;
+
     // classic input system only polls in Update()
     // so must treat input events like discrete button presses as
     // "triggered" until consumed by FixedUpdate()...
@@ -180,6 +182,10 @@ public class RootMotionControlScript : MonoBehaviour
                 lights.SetActive(false);
                 canExit = true;
                 OpenDoors?.Invoke();
+
+                hintGroup.alpha = 0f;
+                hintGroup.interactable = false;
+                hintGroup.blocksRaycasts = false;
             }
 
             if (canExit && false)
@@ -339,6 +345,9 @@ public class RootMotionControlScript : MonoBehaviour
         if (collision.gameObject.tag == "Pressure")
         {
             canPress = true;
+            hintGroup.alpha = 1f;
+            hintGroup.interactable = true;
+            hintGroup.blocksRaycasts = true;
         }
     }
 
@@ -353,6 +362,9 @@ public class RootMotionControlScript : MonoBehaviour
         if (collision.gameObject.tag == "Pressure")
         {
             canPress = false;
+            hintGroup.alpha = 0f;
+            hintGroup.interactable = false;
+            hintGroup.blocksRaycasts = false;
         }
     }
 

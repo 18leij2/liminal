@@ -75,6 +75,6 @@ public class KeypadOpener : MonoBehaviour
 
         hotbarObject.SetActive(true);
         hotbarSlotsGroup.alpha = 1f;
-        hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
+        // hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
     }
 }

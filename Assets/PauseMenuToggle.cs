@@ -6,6 +6,16 @@ public class PauseMenuToggle : MonoBehaviour
     private CanvasGroup canvasGroup;
     private bool isPaused = false;
 
+
+    private void Start()
+    {
+        // Lock the cursor to the center of the screen
+        Cursor.lockState = CursorLockMode.Locked;
+
+        // Hide the cursor
+        Cursor.visible = false;
+    }
+
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -13,6 +23,8 @@ public class PauseMenuToggle : MonoBehaviour
         {
             Debug.LogError("CanvasGroup component missing!");
         }
+
+        
     }
 
     void Update()
@@ -25,6 +37,20 @@ public class PauseMenuToggle : MonoBehaviour
 
     public void TogglePauseMenu()
     {
+        if (isPaused)
+        {
+            // Lock the cursor to the center of the screen
+            Cursor.lockState = CursorLockMode.Locked;
+
+            // Hide the cursor
+            Cursor.visible = false;
+            
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
         isPaused = !isPaused;
 
         canvasGroup.interactable = isPaused;
