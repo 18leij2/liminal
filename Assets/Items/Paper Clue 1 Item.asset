@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Paper Clue 1 Item
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 45296b124aaa61f4dbf68584c1373511, type: 3}
+  itemName: PaperClue1
