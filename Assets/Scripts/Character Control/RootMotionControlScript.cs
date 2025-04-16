@@ -211,7 +211,7 @@ public class RootMotionControlScript : MonoBehaviour
                 inventoryGroup.interactable = false;
                 inventoryGroup.blocksRaycasts = false;
                 hotbarObject.SetActive(true);
-                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
+                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -127.5f, 0f);
             }
         }
     }

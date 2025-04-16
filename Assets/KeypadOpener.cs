@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class KeypadOpener : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class KeypadOpener : MonoBehaviour
     public CanvasGroup hotbarSlotsGroup;
     public CanvasGroup inventoryGroup;
     public CanvasGroup keypadGroup;
-    public CanvasGroup hintGroup;
+    public CanvasGroup keypadHintGroup;
+    public CanvasGroup paperHintGroup;
+    public TMP_Text keypadHintText;
 
     bool canUseKeypad = false;
 
@@ -17,7 +20,6 @@ public class KeypadOpener : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && canUseKeypad) {
-                Debug.Log("player using keypad");
                 if (keypadGroup.alpha == 0f) {
                     OpenKeypad();
                 } else {
@@ -28,31 +30,29 @@ public class KeypadOpener : MonoBehaviour
 
     void OnTriggerEnter(Collider c) {
         if (c.gameObject.tag == "Player") {
-            Debug.Log("player can use keypad");
             canUseKeypad = true;
-            hintGroup.alpha = 1f;
-            hintGroup.interactable = true;
-            hintGroup.blocksRaycasts = true;
+            keypadHintGroup.alpha = 1f;
+            keypadHintGroup.interactable = true;
+            keypadHintGroup.blocksRaycasts = true;
         }
     }
 
     void OnTriggerExit(Collider c) {
         if (c.gameObject.tag == "Player") {
-            Debug.Log("player cant use keypad");
             canUseKeypad = false;
             if (keypadGroup.alpha == 1f) {
                 CloseKeypad();
             }
-            hintGroup.alpha = 0f;
-            hintGroup.interactable = false;
-            hintGroup.blocksRaycasts = false;
+            keypadHintGroup.alpha = 0f;
+            keypadHintGroup.interactable = false;
+            keypadHintGroup.blocksRaycasts = false;
         }
     }
 
     void OpenKeypad() {
-        hintGroup.alpha = 0f;
-        hintGroup.interactable = false;
-        hintGroup.blocksRaycasts = false;
+        paperHintGroup.alpha = 0f;
+        paperHintGroup.interactable = false;
+        paperHintGroup.blocksRaycasts = false;
 
         keypadGroup.alpha = 1f;
         keypadGroup.interactable = true;
@@ -66,6 +66,8 @@ public class KeypadOpener : MonoBehaviour
             hotbarObject.SetActive(false);
         }
         hotbarSlotsGroup.alpha = 0f;
+
+        keypadHintText.text = "Press E to close";
     }
 
     void CloseKeypad() {
@@ -75,6 +77,11 @@ public class KeypadOpener : MonoBehaviour
 
         hotbarObject.SetActive(true);
         hotbarSlotsGroup.alpha = 1f;
+
+        keypadHintText.text = "Press E to interact";
+        paperHintGroup.alpha = 1f;
+        paperHintGroup.interactable = true;
+        paperHintGroup.blocksRaycasts = true;
         // hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
     }
 }
