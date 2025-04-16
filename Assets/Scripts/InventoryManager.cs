@@ -8,8 +8,8 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Singleton;
     public static InventoryItem carriedItem;
 
-    [SerializeField] InventorySlot[] inventorySlots;
-    [SerializeField] InventorySlot[] hotbarSlots;
+    [SerializeField] public InventorySlot[] inventorySlots;
+    [SerializeField] public InventorySlot[] hotbarSlots;
 
     [SerializeField] Transform draggablesTransform;
     [SerializeField] InventoryItem itemPrefab;
