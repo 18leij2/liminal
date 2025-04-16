@@ -260,15 +260,15 @@ public class RootMotionControlScript : MonoBehaviour
                 inventoryGroup.alpha = 1f;
                 inventoryGroup.interactable = true;
                 inventoryGroup.blocksRaycasts = true;
-                hotbarObject.SetActive(false);
-                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -90f, 0f);
+                // hotbarObject.SetActive(false);
+                // hotbarSlotsObject.transform.localPosition = new Vector3(0f, -90f, 0f);
                 
             } else {
                 inventoryGroup.alpha = 0f;
                 inventoryGroup.interactable = false;
                 inventoryGroup.blocksRaycasts = false;
                 hotbarObject.SetActive(true);
-                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -127.5f, 0f);
+                // hotbarSlotsObject.transform.localPosition = new Vector3(0f, 0f, 0f);
             }
         }
     }

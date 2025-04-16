@@ -60,6 +60,7 @@ public class EndSceneManager : MonoBehaviour
 
     void EndGame()
     {
-        SceneManager.LoadScene("EndScene");
+        // SceneManager.LoadScene("EndScene");
+        SceneManager.LoadScene(0);
     }
 }
