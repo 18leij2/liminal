@@ -8420,6 +8420,10 @@ PrefabInstance:
       value: Paper Clue 1
       objectReference: {fileID: 0}
     - target: {fileID: 8410853752875075639, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410853752875075639, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
       propertyPath: m_TagString
       value: noteclue
       objectReference: {fileID: 0}
