@@ -14,6 +14,8 @@ public class KeypadOpener : MonoBehaviour
     public CanvasGroup paperHintGroup;
     public TMP_Text keypadHintText;
 
+    private bool reading;
+
     bool canUseKeypad = false;
 
     // Update is called once per frame
@@ -26,6 +28,17 @@ public class KeypadOpener : MonoBehaviour
                     CloseKeypad();
                 }
             }
+        
+        if (reading)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     void OnTriggerEnter(Collider c) {
@@ -50,6 +63,7 @@ public class KeypadOpener : MonoBehaviour
     }
 
     void OpenKeypad() {
+        reading = true;
         paperHintGroup.alpha = 0f;
         paperHintGroup.interactable = false;
         paperHintGroup.blocksRaycasts = false;
@@ -71,6 +85,7 @@ public class KeypadOpener : MonoBehaviour
     }
 
     void CloseKeypad() {
+        reading = false;
         keypadGroup.alpha = 0f;
         keypadGroup.interactable = false;
         keypadGroup.blocksRaycasts = false;

@@ -117,11 +117,11 @@ public class PlayerController : MonoBehaviour
             if (inventoryObject.activeSelf) {
                 inventoryObject.SetActive(false);
                 hotbarObject.SetActive(true);
-                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
+                // hotbarSlotsObject.transform.localPosition = new Vector3(0f, -120f, 0f);
             } else {
                 inventoryObject.SetActive(true);
                 hotbarObject.SetActive(false);
-                hotbarSlotsObject.transform.localPosition = new Vector3(0f, -90f, 0f);
+                // hotbarSlotsObject.transform.localPosition = new Vector3(0f, -90f, 0f);
             }
         }
     }
