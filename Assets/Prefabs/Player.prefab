@@ -1216,6 +1216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1cbd85c48c272d40a3de9568b96c56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hintCanvas: {fileID: 0}
+  loreText: {fileID: 0}
+  loreCanvas: {fileID: 0}
   animationSpeed: 1.2
   rootMovementSpeed: 1.2
   rootTurnSpeed: 1.5
@@ -1228,6 +1231,30 @@ MonoBehaviour:
   exitMatchTargetsAnimTime: 0.75
   cameraTransform: {fileID: 0}
   rotationSpeed: 5
+  hintGroup: {fileID: 0}
+  notes:
+  - There's no way out
+  - your life is FORFEIT
+  - behind you
+  - i've been stuck here for 3 months now...
+  - erm... it's right behind me, isn't it
+  - the only way up... is down
+  - DEATH IS THE ONLY ESCAPE
+  - It's watching. I can feel it breathing down my neck.
+  - dont trust the light dont trust the light dont trust the light dont trust the
+  - follow the blood...
+  - LISTEN TO THE VOICES DON'T LISTEN TO THEM
+  - I think I've found the way out. There's a grate on the east wall that... wait,
+    what was that noise??
+  - L I M I N A L
+  - L A N I M I L
+  - Is this... Richter Hea? I'm calling on behalf of Nimbus Heavyworks to-
+  - don't let it CATCH you
+  - help us
+  - RED RUM
+  - weapons are useless
+  - resistance is futile
+  - Does time work differently here?
   speedMultiplier: 0.5
   staminaBarObject: {fileID: 0}
   staminaBar: {fileID: 0}

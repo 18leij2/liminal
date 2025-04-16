@@ -2829,6 +2829,92 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6184687658327489397, guid: 4343c522f48efe0438dca65d10544789, type: 3}
   m_PrefabInstance: {fileID: 1275403793}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1276892002
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.854
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.641
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.461
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0020352323
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.0020352323
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071039
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071039
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054477052609376333, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 179.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594970589276833279, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.7030258
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594970589276833279, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_Size.y
+      value: 0.15779485
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594970589276833279, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_Size.z
+      value: 2.1572244
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594970589276833279, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0353508
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594970589276833279, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_Center.y
+      value: -0.09283151
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594970589276833279, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_Center.z
+      value: 0.4213878
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410853752875075639, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_Name
+      value: Lore note
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410853752875075639, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+      propertyPath: m_TagString
+      value: lorenote
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3214435204257312736, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: d8ebaada5cb62514aa059b411981b09c, type: 3}
 --- !u!1 &1290399801
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,6 +3184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38061a52182194c17a687648b8823071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyCounterText: {fileID: 0}
+  textCanvasGroup: {fileID: 0}
 --- !u!23 &1470790547
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3220,8 +3308,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Welcome to Level 0. \n\nMove using WASD, jump with Space, and sprint with
-    Shift (stamina limited).\n\nCrouch with Ctrl to navigate tight spaces and reduce
-    enemy detection.\n\nFind and pick up items using E (keys, batteries, notes).\n\nYour
+    Shift (stamina limited).\n\nUse movement to navigate tight spaces and reduce
+    enemy detection.\n\nFind and interact with items using E (keys, batteries, notes).\n\nYour
     flashlight (F) consumes batteries\u2014use it wisely.\n\nAvoid dangers by hiding
     and managing noise levels.\n\nThe exit unlocks when you collect the key, which
     can be found somewhere in this room.\nPress 'F' to hide/show this tutorial."

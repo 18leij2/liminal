@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -13,6 +14,14 @@ using UnityEditor;
 [RequireComponent(typeof(CharacterInputController))]
 public class RootMotionControlScript : MonoBehaviour
 {
+    public CanvasGroup hintCanvas;
+    private bool canHint;
+
+    public TextMeshProUGUI loreText;
+    public Canvas loreCanvas;
+    private bool canLore;
+    private bool inLore;
+
     public float animationSpeed = 1f;
     public float rootMovementSpeed = 1f;
     public float rootTurnSpeed = 1f;
@@ -38,6 +47,8 @@ public class RootMotionControlScript : MonoBehaviour
     public float rotationSpeed = 0.8f;
 
     public CanvasGroup hintGroup;
+
+    public string[] notes;
 
     // classic input system only polls in Update()
     // so must treat input events like discrete button presses as
@@ -116,6 +127,38 @@ public class RootMotionControlScript : MonoBehaviour
         // hotbarSlotsObject.SetActive(true);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "noteclue")
+        {
+            canHint = true;
+            hintGroup.alpha = 1.0f;
+        }
+
+        if (other.gameObject.tag == "lorenote")
+        {
+            hintGroup.alpha = 1f;
+            canLore = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "noteclue")
+        {
+            canHint = false;
+            hintGroup.alpha = 0f;
+            hintCanvas.alpha = 0f;
+        }
+
+        if (other.gameObject.tag == "lorenote")
+        {
+            inLore = false;
+            canLore = false;
+            hintGroup.alpha = 0f;
+            loreCanvas.gameObject.SetActive(false);
+        }
+    }
 
     private void Update()
     {
@@ -194,6 +237,20 @@ public class RootMotionControlScript : MonoBehaviour
                 lights.SetActive(true);
                 canPress = false;
                 canExit = false;
+            }
+
+            if (canHint)
+            {
+                hintCanvas.alpha = 1f;
+                hintGroup.alpha = 0f;
+            }
+
+            if (canLore && !inLore)
+            {
+                inLore = true;
+                loreCanvas.gameObject.SetActive(true);
+                int index = UnityEngine.Random.Range(0, notes.Length);
+                loreText.text = notes[index];
             }
         }
 
