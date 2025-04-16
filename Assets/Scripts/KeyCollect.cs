@@ -10,16 +10,19 @@ public class KeyCollect : MonoBehaviour
     private void Start()
     {
         UpdateKeyUI(); // Ensure the UI starts correctly
+        textCanvasGroup.alpha = 1f;
+        textCanvasGroup.blocksRaycasts = true;
+        textCanvasGroup.interactable = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) 
         {
-            textCanvasGroup.alpha = 1f;
-            textCanvasGroup.blocksRaycasts = true;
-            textCanvasGroup.interactable = true;
-            Invoke("HideText", 3f);
+            // textCanvasGroup.alpha = 1f;
+            // textCanvasGroup.blocksRaycasts = true;
+            // textCanvasGroup.interactable = true;
+            // Invoke("HideText", 3f);
             Debug.Log("Key Collected!");
             keyCount++;
             UpdateKeyUI();
@@ -27,18 +30,18 @@ public class KeyCollect : MonoBehaviour
         }
     }
 
-    private void HideText() {
-        Debug.Log("hiding text");
-        textCanvasGroup.alpha = 0f;
-        textCanvasGroup.blocksRaycasts = false;
-        textCanvasGroup.interactable = false;
-    }
+    // private void HideText() {
+    //     Debug.Log("hiding text");
+    //     textCanvasGroup.alpha = 0f;
+    //     textCanvasGroup.blocksRaycasts = false;
+    //     textCanvasGroup.interactable = false;
+    // }
 
     private void UpdateKeyUI()
     {
         if (keyCounterText != null)
         {
-            keyCounterText.text = "Keys Collected: (" + keyCount + "/3)";
+            keyCounterText.text = "Keys Collected: " + keyCount + "/3";
 
             if (keyCount >= 3)
             {
