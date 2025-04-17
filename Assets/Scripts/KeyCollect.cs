@@ -24,7 +24,7 @@ public class KeyCollect : MonoBehaviour
             // textCanvasGroup.blocksRaycasts = true;
             // textCanvasGroup.interactable = true;
             // Invoke("HideText", 3f);
-            Debug.Log("Key Collected!");
+            // Debug.Log("Key Collected!");
             keyCount++;
             UpdateKeyUI();
             Destroy(gameObject);
@@ -40,11 +40,36 @@ public class KeyCollect : MonoBehaviour
 
     private void UpdateKeyUI()
     {
+        Debug.Log("updating key ui");
+        int count = 0;
+        foreach (InventorySlot slot in InventoryManager.Singleton.inventorySlots)
+        {
+            if (slot.myItem != null && slot.myItem.myItem != null)
+            {
+                Debug.Log(slot.myItem.myItem.itemName);
+            }
+            if (slot.myItem != null && slot.myItem.myItem != null &&
+                (slot.myItem.myItem.itemName == "Key3"))
+            {
+                count++;
+            }
+        }
+        foreach (InventorySlot slot in InventoryManager.Singleton.hotbarSlots) {
+            if (slot.myItem != null && slot.myItem.myItem != null)
+            {
+                Debug.Log(slot.myItem.myItem.itemName);
+            }
+            if (slot.myItem != null && slot.myItem.myItem != null &&
+                (slot.myItem.myItem.itemName == "Key3"))
+            {
+                count++;
+            }
+        }
         if (keyCounterText != null)
         {
-            keyCounterText.text = "Keys Collected: " + keyCount + "/3";
+            keyCounterText.text = "Keys Collected: " + count + "/3";
 
-            if (keyCount >= 3)
+            if (count >= 3)
             {
                 keyCounterText.text = "Ready to Exit!";
             }
