@@ -9,6 +9,7 @@ public class KeyCollect : MonoBehaviour
 
     private void Start()
     {
+        keyCount = 0;
         UpdateKeyUI(); // Ensure the UI starts correctly
         textCanvasGroup.alpha = 1f;
         textCanvasGroup.blocksRaycasts = true;

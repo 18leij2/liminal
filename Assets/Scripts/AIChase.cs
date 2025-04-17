@@ -145,6 +145,12 @@ public class AIChase : MonoBehaviour
     {
         tryAgainPanel.SetActive(true);
         tryAgainText.text = "It has you now...";
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible   = true;
+
+        KeyCollect.keyCount = 0;
+
         Time.timeScale = 0f;
         KeyCollectionUI.Instance?.ResetKeys();
         // play the sound
