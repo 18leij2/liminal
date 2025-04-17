@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+
 public class AIChase : MonoBehaviour
 {
     public Transform player;
@@ -145,7 +146,7 @@ public class AIChase : MonoBehaviour
         tryAgainPanel.SetActive(true);
         tryAgainText.text = "It has you now...";
         Time.timeScale = 0f;
-
+        KeyCollectionUI.Instance?.ResetKeys();
         // play the sound
         audioSource.PlayOneShot(loseSound);
     }
