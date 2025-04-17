@@ -36,8 +36,7 @@ public class KeypadOpener : MonoBehaviour
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            // constantly disabling cursor interferes with pause
         }
     }
 
@@ -86,6 +85,8 @@ public class KeypadOpener : MonoBehaviour
 
     void CloseKeypad() {
         reading = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         keypadGroup.alpha = 0f;
         keypadGroup.interactable = false;
         keypadGroup.blocksRaycasts = false;
