@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Key 3 Item
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: cd009c76b1d1bb4458488d07c488e1a5, type: 3}
+  itemName: Key3

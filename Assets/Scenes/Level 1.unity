@@ -1796,9 +1796,9 @@ GameObject:
   - component: {fileID: 591442126}
   - component: {fileID: 591442125}
   - component: {fileID: 591442124}
+  - component: {fileID: 591442129}
   - component: {fileID: 591442127}
   - component: {fileID: 591442128}
-  - component: {fileID: 591442129}
   m_Layer: 0
   m_Name: Key3
   m_TagString: Untagged
@@ -1922,9 +1922,9 @@ GameObject:
   - component: {fileID: 603966400}
   - component: {fileID: 603966399}
   - component: {fileID: 603966398}
+  - component: {fileID: 603966403}
   - component: {fileID: 603966401}
   - component: {fileID: 603966402}
-  - component: {fileID: 603966403}
   m_Layer: 0
   m_Name: Key1
   m_TagString: Collectable
@@ -3343,7 +3343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051264871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.02335, y: 1.281337, z: -8.3525}
+  m_LocalPosition: {x: 23.108429, y: 1.2813385, z: -8.3525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3397,7 +3397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6099866153195166214, guid: 64eb99f1a242938419741a49e69e26e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.023266
+      value: 23.108335
       objectReference: {fileID: 0}
     - target: {fileID: 6099866153195166214, guid: 64eb99f1a242938419741a49e69e26e4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5371,9 +5371,9 @@ GameObject:
   - component: {fileID: 1597423151}
   - component: {fileID: 1597423150}
   - component: {fileID: 1597423149}
+  - component: {fileID: 1597423154}
   - component: {fileID: 1597423152}
   - component: {fileID: 1597423153}
-  - component: {fileID: 1597423154}
   m_Layer: 0
   m_Name: Key2
   m_TagString: Collectable
